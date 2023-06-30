@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Quản Lí Học Viện</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+
+<body>
+  <div class="container bg-secondary text-white py-3">
+    <h1 class="text-center mb-4">Quản lý học viện nghiên cứu &amp; giảng dạy</h1>
+    <form id="info-form">
+      <div class="form-row">
+        <div class="form-group  col-md-6">
+          <label for="inputID">ID</label>
+          <input type="text" class="form-control" id="inputID" placeholder="Nhập ID">
+          <span class="text-success m-auto px-2" id="error-tbID"></span>
+							<span class="sp-thongbao" id="tbID"></span>
+        </div>
+        <div class="form-group  col-md-6">
+          <label for="type">Kiểu khách hàng</label>
+          <select class="form-control" id="type">
+            <option value=" ">Lựa chọn kiểu khách hàng</option>
+            <option value="student">Sinh viên</option>
+            <option value="employee">Nhân viên</option>
+            <option value="customer">Khách hàng</option>
+          </select>
+        </div>
+        <div class="form-group  col-md-6">
+          <label for="inputName">Họ tên</label>
+          <input type="text" class="form-control" id="inputName" placeholder="Nhập họ tên">
+          <span class="text-success m-auto px-2" id="error-tbName"></span>
+          <span class="sp-thongbao" id="tbName"></span>
+
+        </div>
+        <div class="form-group  col-md-6">
+          <label for="inputEmail">Email</label>
+          <input type="email" class="form-control" id="inputEmail" placeholder="Nhập địa chỉ email">
+								<span class="text-success m-auto px-2" id="error-tbEmail"></span>
+                <span class="sp-thongbao" id="tbEmail"></span>
+
+        </div>
+        <div class="form-group  col-md-12">
+          <label for="inputAddress">Địa chỉ</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="Nhập địa chỉ">
+								<span class="text-success m-auto px-2" id="error-tbAddress"></span>
+                <span class="sp-thongbao" id="tbAddress"></span>
+
+        </div>
+        <div class="form-group  col-md-12">
+          
+          <div id="bodyform"></div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-primary mr-3" id="addPerson">Thêm người dùng</button>
+        <button type="button" class="btn btn-primary mr-3" id="updatePerson">Cập Nhật</button>
+        <button type="button" class="btn btn-danger" id="resetPerson">Reset</button>
+      </div>
+    </form>
+  </div>
+  <div class="card-body">
+    <div class="row mb-3">
+      <div class="col">
+        <div class="input-group">
+          <input type="text" class="form-control"  placeholder="Loại nhân viên" id="searchName">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="btnTimNV"><i class="fa fa-search"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="PersonList">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+          <h4 class="text-center">DANH SÁCH NGƯỜI DÙNG</h4>
+          <!-- Lọc danh sách người dungf -->
+          <div class="d-flex justify-content-between">
+          <ul class="nav nav-pills mb-3" id="personTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                  <button class="nav-link active" data-user="" id="softHome" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" aria-selected="true" role="tab">All</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                  <button class="nav-link" value="student" data-user="student" id="softStudent" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" aria-selected="false" role="tab" tabindex="-1">
+                              Student
+                  </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="softEmployee" data-user="employee" value="employee" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" aria-selected="false" role="tab" tabindex="-1">
+                              Employee
+                  </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="softCustomer" value="customer" data-user="customer" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" aria-selected="false" role="tab" tabindex="-1">
+                          Customer
+              </button>
+
+        </li>
+      </ul>
+      <ul class="nav nav-pills mb-3" id="softName" role="tablist">
+        <li class="nav-item d-flex" role="presentation">
+              <button class="nav-link "  id="btnTang" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" aria-selected="false" role="tab" tabindex="-1">
+                            Sắp xếp theo tên A-Z
+                    <i class="fa-solid fa-arrow-up" ></i>
+              </button>
+              <button class="nav-link "  id="btnGiam" style="display :none;" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" aria-selected="false" role="tab" tabindex="-1">
+                Sắp xếp theo tên A-Z
+              <i class="fa-solid fa-arrow-down" ></i>
+              </button>
+        </li>
+        
+  </ul>
+
+      </div>
+          <table class="table table-striped w-100">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Họ tên</th>
+                <th scope="col">Địa chỉ</th>
+                <th scope="col">Email</th>
+                <th scope="col">Thông tin</th>
+                <th scope="col">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="danhSachPerson">
+              
+            </tbody>
+          </table>
+      </div>
+    </div>
+        </div>
+    </div>
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+    </script>
+    <!-- main js -->
+    <script type="module" src="./js/main.js"></script>
+</body>
+
+</html>
